@@ -1,3 +1,8 @@
-; Add beep function DONE
-; Add fif function DONE
-fif 5 > 6
+; Hello,world! in Fels
+writeln "Hello,world!"
+; variable and reading to variable in Fels
+var var1 = null
+read var1
+writeln var1
+; numeric writeln in Fels
+writeln 5 + 5
