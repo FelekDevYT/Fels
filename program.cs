@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,24 @@ namespace lang
     {
         static void Main(string[] args)
         {
-            commander.MAIN("program.txt");
+            while (true)
+            {
+                Label:
+                Console.Write("Enter Command>");
+                String[] command = Console.ReadLine().Split(' ');
+                if (command[0] == "start")
+                {
+                    if (command.Length == 1)
+                    {
+                        commander.MAIN("program.txt");
+                        goto Label;
+                    }
+                    else
+                    {
+                        commander.MAIN(command[1]);
+                    }
+                }
+            }
         }
     }
 }
