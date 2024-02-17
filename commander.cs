@@ -13,7 +13,7 @@ namespace lang
     {
         public static void MAIN(String path)
         {
-            String[] str = File.ReadAllLines(path);
+            String[] str = str = File.ReadAllLines(path); ;
             String[] var_value = new String[1024];
             String[] var_names = new String[1024];
             int uses = 0;
@@ -114,6 +114,19 @@ namespace lang
                         {
                             Exceptions.NonVarException();
                         }
+                        break;
+                    case "beep":
+                        Console.Beep(Convert.ToInt32(line[1]), Convert.ToInt32(line[2]));
+                        break;
+                    case "fif":
+                        /*
+                         *fif a > b
+                         *fif 1 > 2
+                         */
+                        //
+                        Console.WriteLine(Parser.EQExpression(Convert.ToInt32(line[1]), line[2], Convert.ToInt32(line[3])));
+                        break;
+                    case ";":
                         break;
                 }
             }
