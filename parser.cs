@@ -29,6 +29,25 @@ namespace langg
             }
             return 0;
         }
+        public static Boolean EQExpression(int st1,String el,int st2)
+        {
+            switch (el)
+            {
+                case ">":
+                    return st1 > st2;
+                case "<":
+                    return st1 < st2;
+                case "!=":
+                    return st1 != st2;
+                case "==":
+                    return st1 == st2;
+                case ">=":
+                    return st1 >= st2;
+                case "<=":
+                    return st1 == st2;
+            }
+            return false;
+        }
     }
     public class Exceptions
     {
