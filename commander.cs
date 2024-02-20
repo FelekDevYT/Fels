@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Xml.Schema;
 using langg;
+using System.Windows.Forms;
+using System.Xml.Schema;
 
 namespace lang
 {
@@ -16,9 +13,12 @@ namespace lang
             String[] str = str = File.ReadAllLines(path); ;
             String[] var_value = new String[1024];
             String[] var_names = new String[1024];
+            String st1;
+            String st2;
             int uses = 0;
             int zc = 0;
             int use = 0;
+            bool is_html = false;
             for (int i = 0; i < str.Length; i++)
             {
                 String[] line = str[i].Split(' ');
@@ -123,13 +123,54 @@ namespace lang
                          *fif a > b
                          *fif 1 > 2
                          */
-                        //
                         Console.WriteLine(Parser.EQExpression(Convert.ToInt32(line[1]), line[2], Convert.ToInt32(line[3])));
                         break;
                     case ";":
                         break;
+                    case "if":
+                        /*
+                         * if 5 > 5 1
+                         * if var1 > var2
+                         */
+                        bool ansver = Parser.EQExpression(Convert.ToInt32(line[1]), line[2], Convert.ToInt32(line[3]));
+                        if (ansver)
+                        {
+                            ;
+                        }
+                        else
+                        {
+                            i += Convert.ToInt32(line[4]);
+                        }
+                        break;
+                    case "goto":
+                        i+= Convert.ToInt32(line[1]);
+                        break;
+                    case "message":
+                        switch (line[1])
+                        {
+                            case "info":
+                                MessageBox.Show(line[3], line[2],MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            case "error":
+                                MessageBox.Show(line[3], line[2], MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            case "war":
+                                MessageBox.Show(line[3], line[2], MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                break;
+                            case "qu":
+                                MessageBox.Show(line[3], line[2], MessageBoxButtons.OK, MessageBoxIcon.Question);
+                                break;
+                            case "exc":
+                                MessageBox.Show(line[3], line[2], MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                break;
+                            case "stop":
+                                MessageBox.Show(line[3], line[2], MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                break;
+                        }
+                        break;
                 }
             }
+            Console.ForegroundColor = ConsoleColor.White;
             Console.ReadKey();
         }
     }
